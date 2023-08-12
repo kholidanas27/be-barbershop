@@ -17,23 +17,26 @@ app.use(middlewareLogRequest);
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use("/assets", express.static("public/images"));
+app.use(express.urlencoded({ extended: true }));
 
+// Routes
 app.use("/users", usersRoutes);
+require("./routes/auth")(app);
+require("./routes/admin/users")(app);
+
 app.post("/upload", upload.single("photo"), (req, res) => {
   res.json({
     message: "Upload berhasil",
   });
+});
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to barbershop app." });
 });
 
 app.use((err, req, res, next) => {
   res.json({
     message: err.message,
   });
-});
-
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to barbershop app." });
 });
 
 app.listen(PORT, () => {
