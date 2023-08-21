@@ -78,11 +78,15 @@ const signIn = (req, res) => {
           authorities.push(roles[i].name);
         }
         res.status(200).send({
-          id: user.id,
-          username: user.username,
-          email: user.email,
-          roles: authorities,
-          accessToken: token,
+          code: 200,
+          message: "success",
+          data: {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            roles: authorities,
+            accessToken: token,
+          },
         });
       });
     })
