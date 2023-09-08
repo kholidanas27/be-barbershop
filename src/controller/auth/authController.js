@@ -28,13 +28,13 @@ const signUp = (req, res) => {
           },
         }).then((roles) => {
           user.setRoles(roles).then(() => {
-            res.send({ message: "User was registered successfully!" });
+            res.send({ message: "success" });
           });
         });
       } else {
         // user role = 2
         user.setRoles([2]).then(() => {
-          res.send({ message: "User was registered successfully!" });
+          res.send({ message: "success" });
         });
       }
     })
